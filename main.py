@@ -1,14 +1,14 @@
 from glob import glob
 from mirnet.train import LowLightTrainer
-from mirnet.utils import init_wandb, download_dataset
+from mirnet.utils import download_dataset
 
 
 download_dataset('LOL')
 
-init_wandb(
-    project_name='mirnet', experiment_name='LOL_lowlight',
-    wandb_api_key='cf0947ccde62903d4df0742a58b8a54ca4c11673'
-)
+# init_wandb(
+#     project_name='mirnet', experiment_name='LOL_lowlight',
+#     wandb_api_key='cf0947ccde62903d4df0742a58b8a54ca4c11673'
+# )
 
 train_low_light_images = glob('./our485/low/*')
 train_high_light_images = glob('./our485/high/*')

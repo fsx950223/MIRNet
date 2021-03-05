@@ -4,7 +4,6 @@ from typing import List
 from .utils import psnr
 from .model import mirnet_model
 from .losses import charbonnier_loss
-from wandb.keras import WandbCallback
 from .dataloaders import LOLDataLoader
 
 
@@ -55,7 +54,9 @@ class LowLightTrainer:
                 os.path.join(checkpoint_dir, 'low_light_weights_best.h5'),
                 monitor="val_psnr", save_weights_only=True,
                 mode="max", save_best_only=True, save_freq=1
-            ), WandbCallback()
+            ),
+            tf.keras.callbacks.TensorBoard(os.path.join(checkpoint_dir, 'train'),
+                                           profile_batch=0)
         ]
         history = self.model.fit(
             self.train_dataset, validation_data=self.valid_dataset,
